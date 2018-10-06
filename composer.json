@@ -1,0 +1,13 @@
+{
+    "name": "capsuleToHubspot",
+    "require": {
+        "nategood/httpful": "^0.2.20"
+    },
+    "authors": [
+        {
+            "name": "Lahiru Samaraweera",
+            "email": "lahiru.studioxeon@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
