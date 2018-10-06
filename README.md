@@ -8,27 +8,12 @@ Capsule to Hubspot CRM Data migration Tool
 * Capsule token -> ./token/capsules.key
 * Hubspot token -> ./token/hubspot.key
 
-* For caching make sure to have following folders
-* ./cache/capsules
-* ./cache/capsules_notes
-* ./cache/capsules_tasks
-* ./cache/capsules_entries
-* ./cache/capsules_parties
 
 ### How do I run? ###
-* cache capsule parties ( person & organisation )           ->  php execute.php cachecapsuleparties
-* Create Companies and Contacts in Hubspot                  ->  php execute.php migrateparties
-* cache notes, tasks, ID mapping and capsules entries       ->  php execute.php cachedata
-* Search and cache a tempory ID                             ->  php execute.php searchcontact nikki@vetsto.comnet
-* Migrate Notes for cached contact ID                        ->  php execute.php createNotes cached 200
+* Cache capsule parties ( person & organisation )           ->  php execute.php cachecapsule
+* Define Field Mapping information ( company and contact field mapping & user ID mapping ) at .data/*
+* Start migration                                           ->  php execute.php startMigration
 
 
-### Procedure ###
-* cache capsule parties
-* create companies without life cycle state
-* create contacts
-* cache ID mapping
-* create engagements ( notes , tasks , emails )
-* calculate opportunities
-* update opportunities
+
 
