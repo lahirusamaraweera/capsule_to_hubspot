@@ -4,8 +4,6 @@ include('./src/hubspot.php');
 include('./src/partymigrate.php');
 include('./src/notesmigrate.php');
 include('./src/taskmigrate.php');
-include('./src/refinemigrate.php');
-include('./src/refinecompanymigrate.php');
 include('./src/captohubspot.php');
 
 
@@ -27,4 +25,6 @@ define('OWNER_DETAILS_LOCATION', './cache/owner_details/');
 define('ID_CACHE_PATH', './cache/testid.value');
 define('COMPANY_MAPPING_PATH', './data/company_fieldsmapping.json');
 define('CONTACT_MAPPING_PATH', './data/contact_fieldsmapping.json');
+define('CONTACT_CONDITIONAL_POPULATION_RULES_PATH', './data/conditional_populations/contact_field_rules.json');
+define('COMPANY_CONDITIONAL_POPULATION_RULES_PATH', './data/conditional_populations/company_field_rules.json');
 define('OWNER_MAPPING_PATH', './data/owner_id_mapping.json');

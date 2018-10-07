@@ -184,129 +184,10 @@ trait partyMigrate{
         } 
 
 
-        if(count($note->tags)){
-            $tag = $note->tags[0];
-            $payload[] = $this->getBindValue('parent_account', $tag->name);
-        }
-
-
-        // business type
-        $b_type_rules = [
-            [
-                'c_field' => 'Account Type',
-                'applicable_values' => ['Independent'],
-                'preferred_value' => 'Vet Clinic | Independent'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Industry'],
-                'preferred_value' => 'Industry | Other'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Corporate Clinic'],
-                'preferred_value' => 'Vet Clinic | Corporate'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['PMS Company'],
-                'preferred_value' => 'PIMS Provider'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Website provider'],
-                'preferred_value' => '3rd Party | Website Provider'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Reminder provider'],
-                'preferred_value' => '3rd Party | Reminders Provider'
-            ]
-        ];
-
-        $matched_b_type = $this->getConditionalMappedValue($note->fields, $b_type_rules);
-        if($matched_b_type){
-            $payload[] = $this->getBindValue('business-type', $matched_b_type);
-        }
-
-        // business sub type 
-        $b_s_type_rules = [
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Independent Clinic - Standard'],
-                'preferred_value' => 'First Opinion'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Independent Clinic - Mobile'],
-                'preferred_value' => 'Mobile'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Independent Clinic - Referral'],
-                'preferred_value' => 'Referral'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Independent Clinic - Mixed Practice'],
-                'preferred_value' => 'Referral + First Opinion'
-            ],
-            
-        ];
-
-        $matched_sub_b_type = $this->getConditionalMappedValue($note->fields, $b_s_type_rules);
-        if($matched_sub_b_type){
-            $payload[] = $this->getBindValue('business_sub_type', $matched_sub_b_type);
-        }else{
-            $payload[] = $this->getBindValue('business_sub_type', 'First Opinion');
-        }
-
-        // vet clinic type population
-        $v_c_type_rules = [
-            [
-                'c_field' => 'Account Type',
-                'applicable_values' => ['Corporate master account'],
-                'preferred_value' => 'Corporate | Master Account'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['Independent'],
-                'preferred_value' => 'Vet Clinic | Main Branch'
-            ]
-            
-        ];
-
-        $matched_vet_clinic_type = $this->getConditionalMappedValue($note->fields, $v_c_type_rules);
-        if($matched_vet_clinic_type){
-            $payload[] = $this->getBindValue('vet_clinic_type', $matched_vet_clinic_type);
-            
-        }
-
-        //life cycle stage populations
-        $life_cycle_stage = null;
-        $l_c_s_rules = [
-            [
-                'c_field' => 'Client Status',
-                'applicable_values' => ['Client OABP', 'Client_OABP/WA','Onboarding'],
-                'preferred_value' => 'customer'
-            ],
-            [
-                'c_field' => 'Company type',
-                'applicable_values' => ['PMS Company'],
-                'preferred_value' => 'evangelist'
-            ]
-            
-        ];
-        $matched_life_cycle_stage = $this->getConditionalMappedValue($note->fields, $l_c_s_rules);
-        if($matched_life_cycle_stage){
-            $life_cycle_stage = $matched_life_cycle_stage;
-        }else{
-            if(count($note->phoneNumbers) > 0 || count($note->emailAddresses) > 0){
-                $life_cycle_stage = 'lead';
-            }
-        }
-        $payload[] = $this->getBindValue('lifecyclestage', is_null($life_cycle_stage) ? 'subscriber' : $life_cycle_stage);
-
+        //conditional field value population
+        $conditional_rules = $this->getConditionalPopulationRules(COMPANY_CONDITIONAL_POPULATION_RULES_PATH);
+        var_dump($conditional_rules);exit(0);
+        
         return $this->getFilteredPayload($payload);
     }
 
@@ -460,5 +341,9 @@ trait partyMigrate{
             }
         }
         return null;
+    }
+
+    private function getConditionalPopulationRules($path){
+        return json_decode(file_get_contents($path));
     }
 }

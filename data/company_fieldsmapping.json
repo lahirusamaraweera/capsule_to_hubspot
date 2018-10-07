@@ -1,0 +1,68 @@
+{
+    "name" : {
+        "hubspot_property" : "name",
+        "mapping" : {}
+    },
+    "id" : {
+        "hubspot_property" : "capsulecrm_id",
+        "mapping" : {}
+    },
+    "country" : {
+        "hubspot_property" : "country",
+        "mapping" : {}
+    },
+    "city" : {
+        "hubspot_property" : "city",
+        "mapping" : {}
+    },
+    "zip" : {
+        "hubspot_property" : "zip",
+        "mapping" : {}
+    },
+    "street" : {
+        "hubspot_property" : "address",
+        "mapping" : {}
+    },
+    "state" : {
+        "hubspot_property" : "state",
+        "mapping" : {}
+    },
+    "email" : {
+        "hubspot_property" : "email",
+        "mapping" : {}
+    },
+    "email_1" : {
+        "hubspot_property" : "email_1",
+        "mapping" : {}
+    },
+    "email_2" : {
+        "hubspot_property" : "email_2",
+        "mapping" : {}
+    },
+    "phone" : {
+        "hubspot_property" : "phone",
+        "mapping" : {}
+    },
+    "work_phone" : {
+        "hubspot_property" : "work_phone",
+        "mapping" : {}
+    },
+    "work_phone_2" : {
+        "hubspot_property" : "work_phone_2",
+        "mapping" : {}
+    },
+    "website" : {
+        "hubspot_property" : "website",
+        "mapping" : {}
+    },
+    "Time Zone" : {
+        "hubspot_property" : "timezone",
+        "mapping" : {}
+    },
+    "sample_option_field_in_capsule" : {
+        "hubspot_property" : "hubspot_field_name",
+        "mapping" : {
+            "value_in_capsule" : "mapped_value_in_hubspot"
+        }
+    }
+}

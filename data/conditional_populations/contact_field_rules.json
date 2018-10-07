@@ -1,0 +1,13 @@
+[
+    {
+        "hubspot_field_name" : "business-type",
+        "rules" : [
+            {
+                "c_field" : "capsule_field_name",
+                "applicable_values" : ["applicable_value_1", "applicable_value_2"],
+                "preferred_value" : 'preffered_value if satisfed this rule'
+            }
+            
+        ]
+    }
+]

@@ -4,8 +4,6 @@ class capToHubspot{
     use partyMigrate;
     use noteMigrate;
     use taskMigrate;
-    use refineMigrate;
-    use refinecompanymigrate;
 
     const contact_cache = 'contact_cache';
     const company_cache = 'company_cache';

@@ -30,7 +30,8 @@ function cachecapsule(){
  * Start migration
  */
 function startMigration(){
-
+    $nwe = new capToHubspot();
+    
     // party migration
     echo ">>>>> >>>>>> Creating notes and emails on Hubspot" . PHP_EOL;
     $nwe->processCacheParties();
