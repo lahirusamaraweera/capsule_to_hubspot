@@ -54,7 +54,7 @@ function startMigration(){
  * Migrate only notes and emails
  * To be use in testig purposes
  */
-function migrateNotes(){
+function migratenotes(){
     $nwe = new capToHubspot();
     echo ">>>>> >>>>>> Migrating notes and emails to the Hubspot" . PHP_EOL;
     $nwe->processCacheNotes( ['email', 'note']);
