@@ -32,15 +32,12 @@ function cachecapsule(){
 function startMigration(){
     $nwe = new capToHubspot();
     
-    // party migration
-    echo ">>>>> >>>>>> Creating notes and emails on Hubspot" . PHP_EOL;
+    echo ">>>>> >>>>>> Creating contacts and companies on Hubspot" . PHP_EOL;
     $nwe->processCacheParties();
 
-    // cache contact IDs
     $count = $nwe->cacheContactsCapsulesIDsWithHubspotIDs();
     echo ">>>>> >>>>>> Read and cached {$count} Hubspot contacts" . PHP_EOL;
 
-    // cache company IDs
     $count = $nwe->cacheCompaniesCapsulesIDsWithHubspotIDs();
     echo ">>>>> >>>>>> Read and cached {$count} Hubspot companies" . PHP_EOL;
 
@@ -54,6 +51,11 @@ function startMigration(){
     $nwe->processContactCompanyAssociation();
 }
 
+function cachefieldmapping(){
+    $nwe = new capToHubspot();
+    $nwe->readCapsuleCustomField();
+    $nwe->readHubspotField();
+}
 
 /**
  * Cache owner details
@@ -67,11 +69,10 @@ function cacheownerdetails(){
 /**
  * delete huspot tasks
  */
-function deletehubspottasks(){
+function deletecache(){
     $nwe = new capToHubspot();  
-    $count = $nwe->deletehubspottasks();
-    echo ">>>>> >>>>>> Deleted hubspot tasks" . PHP_EOL;
-    
+    $count = $nwe->deletecache();
+    echo ">>>>> >>>>>> Cache is deleted " . PHP_EOL;
 }
 
 /**
@@ -98,7 +99,6 @@ function searchcompany($domain){
     foreach($companies as $company){
         echo 'company : '.$company->companyId.PHP_EOL;
     }
-   
     
 }
 

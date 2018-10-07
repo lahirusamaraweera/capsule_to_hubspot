@@ -4,7 +4,11 @@ include('./src/hubspot.php');
 include('./src/partymigrate.php');
 include('./src/notesmigrate.php');
 include('./src/taskmigrate.php');
+include('./src/deletecache.php');
 include('./src/captohubspot.php');
+
+define('CAPSULES_KEY', __DIR__.'/../token/capsule.key');
+define('HUBSPOT_KEY', __DIR__.'/../token/hubspot.key');
 
 
 define('CONFIG_FILE_PATH', __DIR__.'/../config.json');

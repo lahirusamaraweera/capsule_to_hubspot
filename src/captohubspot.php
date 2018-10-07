@@ -4,6 +4,7 @@ class capToHubspot{
     use partyMigrate;
     use noteMigrate;
     use taskMigrate;
+    use deletecache;
 
     const contact_cache = 'contact_cache';
     const company_cache = 'company_cache';
@@ -20,17 +21,34 @@ class capToHubspot{
 
     function __construct($testId = null)
     {
-        $this->setTokens();
-        $this->loadMapping();
+        try{
+            $this->setTokens();
+            $this->loadMapping();
+        }catch(\Exception $e){
+            die( 'Error :- '.$e->getMessage().PHP_EOL );
+    }
     }
 
 
     private function setTokens(){
-        $this->capsuleToken = file_get_contents('./token/capsules.key');
-        $this->hubspotToken = file_get_contents('./token/hubspot.key');
+        if( !file_exists(CAPSULES_KEY) || !file_exists(HUBSPOT_KEY) ){
+            throw new \Exception('Hubspot key and capsule key is required.');
+    }
+        $this->capsuleToken = file_get_contents(CAPSULES_KEY);
+        $this->hubspotToken = file_get_contents(HUBSPOT_KEY);
     }
 
     private function loadMapping(){
+        if( !file_exists(COMPANY_MAPPING_PATH) ){
+            throw new \Exception('Company field mapping file is required.');
+        }
+        if( !file_exists(CONTACT_MAPPING_PATH) ){
+            throw new \Exception('Contact field mapping file is required.');
+        }
+        if( !file_exists(CONFIG_FILE_PATH) ){
+            throw new \Exception('Config file is required.');
+        }
+
         $this->companyFieldsMapping =  json_decode(file_get_contents(COMPANY_MAPPING_PATH));
         $this->contactFieldsMapping =  json_decode(file_get_contents(CONTACT_MAPPING_PATH));
 
