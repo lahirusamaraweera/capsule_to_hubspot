@@ -50,7 +50,19 @@ function startMigration(){
     echo ">>>>> >>>>>> Associating contacts with companies" . PHP_EOL;
     $nwe->processContactCompanyAssociation();
 }
+/**
+ * Migrate only notes and emails
+ * To be use in testig purposes
+ */
+function migrateNotes(){
+    $nwe = new capToHubspot();
+    echo ">>>>> >>>>>> Migrating notes and emails to the Hubspot" . PHP_EOL;
+    $nwe->processCacheNotes( ['email', 'note']);
+}
 
+/**
+ * cache the filed mapping informations
+ */
 function cachefieldmapping(){
     $nwe = new capToHubspot();
     $nwe->readCapsuleCustomField();
@@ -67,7 +79,7 @@ function cacheownerdetails(){
 }
 
 /**
- * delete huspot tasks
+ * delete capsule data cache
  */
 function deletecache(){
     $nwe = new capToHubspot();  
@@ -83,7 +95,6 @@ function searchcontact($email){
     $contact = $nwe->readHubspotContactsByEmail($email);
     echo json_encode($contact, JSON_PRETTY_PRINT);
     if(isset($contact->vid)){
-        file_put_contents(ID_CACHE_PATH, $contact->vid);
         echo 'Cached Contact ID '. $contact->vid .PHP_EOL;
     }else{
         echo json_encode($contact, JSON_PRETTY_PRINT).PHP_EOL;

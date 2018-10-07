@@ -4,7 +4,7 @@ Capsule to Hubspot CRM Data migration Tool
 
 ### How do I get set up? ###
 
-* Generate API Access token and store them token folder as follows
+* Generate API Access token and store them as follows
 * Capsule token -> ./token/capsules.key
 * Hubspot token -> ./token/hubspot.key
 
